@@ -1,6 +1,7 @@
 import { Mail, Lock, MessageSquare, Volume2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 const modules = [
   {
@@ -8,6 +9,7 @@ const modules = [
     description: "Learn to identify and deflect phishing attacks through pattern recognition exercises. Master the art of spotting deceptive emails and protecting your digital identity.",
     time: "15-20 minutes",
     icon: Mail,
+    link: "/phishing-kata",
   },
   {
     title: "Password Stance",
@@ -45,10 +47,9 @@ const Modules = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {modules.map((module, index) => {
             const Icon = module.icon;
-            return (
+            const cardContent = (
               <Card 
-                key={index}
-                className="gradient-card shadow-card border-border transition-smooth hover:scale-105 hover:shadow-glow group cursor-pointer"
+                className="gradient-card shadow-card border-border transition-smooth hover:scale-105 hover:shadow-glow group cursor-pointer h-full"
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
@@ -67,6 +68,14 @@ const Modules = () => {
                   </CardDescription>
                 </CardContent>
               </Card>
+            );
+            
+            return module.link ? (
+              <Link key={index} to={module.link}>
+                {cardContent}
+              </Link>
+            ) : (
+              <div key={index}>{cardContent}</div>
             );
           })}
         </div>
